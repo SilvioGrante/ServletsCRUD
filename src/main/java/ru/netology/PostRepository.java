@@ -1,10 +1,12 @@
-
 package ru.netology;
+
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
+@Repository
 public class PostRepository {
 
     private final List<Post> posts = new ArrayList<>();
@@ -44,5 +46,3 @@ public class PostRepository {
         posts.removeIf(post -> post.getId() == id);
     }
 }
-
-
