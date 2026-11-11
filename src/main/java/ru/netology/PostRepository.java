@@ -35,14 +35,12 @@ public class PostRepository {
             }
         }
 
-        throw new IllegalArgumentException(
-                "Post with id " + post.getId() + " not found"
-        );
+        posts.add(post);
+        nextId.updateAndGet(current ->
+                Math.max(current, post.getId() + 1));
     }
 
     public synchronized void removeById(long id) {
         posts.removeIf(post -> post.getId() == id);
     }
 }
-
-
