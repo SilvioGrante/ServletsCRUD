@@ -3,11 +3,13 @@ package ru.netology;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.springframework.stereotype.Controller;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+@Controller
 public class PostController {
 
     private final PostService service;

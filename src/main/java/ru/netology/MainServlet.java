@@ -1,20 +1,28 @@
 
 package ru.netology;
 
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 
 public class MainServlet extends HttpServlet {
 
+    private AnnotationConfigApplicationContext context;
     private PostController controller;
 
     @Override
     public void init() {
-        final var repository = new PostRepository();
-        final var service = new PostService(repository);
-        controller = new PostController(service);
+        context = new AnnotationConfigApplicationContext(AppConfig.class);
+        controller = context.getBean(PostController.class);
+    }
+
+    @Override
+    public void destroy() {
+        if (context != null) {
+            context.close();
+        }
     }
 
     @Override
@@ -58,4 +66,5 @@ public class MainServlet extends HttpServlet {
         }
     }
 }
+
 
